@@ -1,2 +1,2 @@
-# MarketPlace-Pro.github.io
-GitHub Pages site for Marketplace Pro
+  # 
+A global e-commerce platform built with HTML, CSS, and JavaScript 
