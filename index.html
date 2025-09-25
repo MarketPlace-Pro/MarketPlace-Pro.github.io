@@ -23,7 +23,7 @@
             border-radius: 10px;
             margin-bottom: 30px;
         }
-        #productsContainer { 
+        .products-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
             gap: 20px; 
@@ -34,7 +34,32 @@
             border-radius: 10px;
             padding: 20px;
             background: white;
+            text-align: center;
         }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .product-price {
+            color: #4CAF50;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-cart { background: #4CAF50; }
+        .btn-details { background: #2196F3; }
     </style>
 </head>
 <body>
@@ -44,55 +69,47 @@
             <p>Discover amazing products at great prices</p>
         </header>
         
-        <div id="productsContainer">
-            <div style="text-align:center;padding:40px;">Loading products...</div>
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Headphones" alt="Wireless Bluetooth Headphones" class="product-image">
+                <h3>Wireless Bluetooth Headphones</h3>
+                <div class="product-price">$79.99</div>
+                <p>High-quality wireless headphones with noise cancellation</p>
+                <a href="product1.html" class="btn btn-cart">Add to Cart</a>
+                <a href="product1.html" class="btn btn-details">View Details</a>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300/50E3C2/FFFFFF?text=Smartwatch" alt="Smart Fitness Watch" class="product-image">
+                <h3>Smart Fitness Watch</h3>
+                <div class="product-price">$199.99</div>
+                <p>Track your health and fitness with this advanced smartwatch</p>
+                <a href="product2.html" class="btn btn-cart">Add to Cart</a>
+                <a href="product2.html" class="btn btn-details">View Details</a>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300/B8E986/FFFFFF?text=Coffee" alt="Organic Coffee Beans" class="product-image">
+                <h3>Organic Coffee Beans</h3>
+                <div class="product-price">$24.99</div>
+                <p>Premium organic coffee beans from Ethiopia</p>
+                <a href="product3.html" class="btn btn-cart">Add to Cart</a>
+                <a href="product3.html" class="btn btn-details">View Details</a>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Yoga+Mat" alt="Yoga Mat Premium" class="product-image">
+                <h3>Yoga Mat Premium</h3>
+                <div class="product-price">$49.99</div>
+                <p>Non-slip yoga mat for comfortable exercises</p>
+                <a href="product4.html" class="btn btn-cart">Add to Cart</a>
+                <a href="product4.html" class="btn btn-details">View Details</a>
+            </div>
         </div>
     </div>
-
-    <script>
-        // INLINE JAVASCRIPT - This will definitely execute
-        console.log("🔄 Inline JavaScript executing");
-        
-        async function loadProducts() {
-            try {
-                const response = await fetch('products.json');
-                const data = await response.json();
-                return data.products;
-            } catch (error) {
-                console.error('Error:', error);
-                return [];
-            }
-        }
-        
-        function renderProducts(products) {
-            const container = document.getElementById('productsContainer');
-            if (!container) return;
-            
-            container.innerHTML = products.map(product => 
-                `<div class="product-card">
-                    <img src="${product.image}" alt="${product.name}" style="width:100%;height:150px;object-fit:cover;border-radius:5px;">
-                    <h3>${product.name}</h3>
-                    <p style="color:#4CAF50;font-size:1.2em;font-weight:bold;">$${product.price}</p>
-                    <p>${product.description.substring(0, 80)}...</p>
-                    <div style="margin-top:15px;">
-                        <button onclick="alert('Added ${product.name} to cart')" 
-                                style="background:#4CAF50;color:white;border:none;padding:10px;border-radius:5px;margin-right:10px;">
-                            Add to Cart
-                        </button>
-                        <a href="product-detail.html?id=${product.id}" 
-                           style="background:#2196F3;color:white;padding:10px;border-radius:5px;text-decoration:none;">
-                            View Details
-                        </a>
-                    </div>
-                </div>`
-            ).join('');
-        }
-        
-        // Load and display products
-        loadProducts().then(products => {
-            renderProducts(products);
-            console.log('Products loaded successfully');
-        });
-    </script>
 </body>
 </html>
