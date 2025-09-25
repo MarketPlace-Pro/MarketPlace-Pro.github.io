@@ -14,34 +14,34 @@
     <div id="productDetail" class="product-detail">Loading product...</div>
 
     <script>
-        // Simple product loading that definitely works
-        const productId = new URLSearchParams(window.location.search).get('id');
+        // INLINE JAVASCRIPT for product details
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
         
-        if (!productId) {
-            document.getElementById('productDetail').innerHTML = '<p>No product specified</p>';
-        } else {
-            fetch('products.json')
-                .then(r => r.json())
-                .then(data => {
-                    const product = data.products.find(p => p.id == productId);
-                    if (product) {
-                        document.getElementById('productDetail').innerHTML = `
-                            <h1>${product.name}</h1>
-                            <img src="${product.image}" width="100%" style="border-radius:10px;">
-                            <p style="font-size:24px;color:#4CAF50;"><strong>$${product.price}</strong></p>
-                            <p>${product.description}</p>
-                            <button style="background:#4CAF50;color:white;padding:15px;border:none;border-radius:5px;width:100%;margin-top:20px;">
-                                Add to Cart
-                            </button>
-                        `;
-                    } else {
-                        document.getElementById('productDetail').innerHTML = '<p>Product not found</p>';
-                    }
-                })
-                .catch(err => {
-                    document.getElementById('productDetail').innerHTML = '<p>Error loading product</p>';
-                });
-        }
+        fetch('products.json')
+            .then(r => r.json())
+            .then(data => {
+                const product = data.products.find(p => p.id == productId);
+                const container = document.getElementById('productDetail');
+                
+                if (product) {
+                    container.innerHTML = `
+                        <h1>${product.name}</h1>
+                        <img src="${product.image}" width="100%" style="border-radius:10px;">
+                        <p style="font-size:24px;color:#4CAF50;"><strong>$${product.price}</strong></p>
+                        <p><strong>Category:</strong> ${product.category}</p>
+                        <p><strong>Description:</strong> ${product.description}</p>
+                        <button style="background:#4CAF50;color:white;padding:15px;border:none;border-radius:5px;width:100%;margin-top:20px;">
+                            Add to Cart
+                        </button>
+                    `;
+                } else {
+                    container.innerHTML = '<p>Product not found</p>';
+                }
+            })
+            .catch(err => {
+                document.getElementById('productDetail').innerHTML = '<p>Error loading product</p>';
+            });
     </script>
 </body>
 </html>
