@@ -1,0 +1,3 @@
+[33m09bf958[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Fix product rendering timing issue
+[33m787f4b3[m Add debug version to diagnose product loading issue
+[33m977ba8b[m Remove temporary and backup files

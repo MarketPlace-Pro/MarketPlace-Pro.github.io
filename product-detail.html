@@ -1,233 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>Product Details</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details - Marketplace Pro</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Arial', sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        .back-btn { 
-            background: #fff; 
-            color: #333; 
-            padding: 12px 25px; 
-            text-decoration: none; 
-            border-radius: 25px; 
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        .back-btn:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-        .product-detail { 
-            background: white; 
-            padding: 40px; 
-            border-radius: 20px; 
-            margin: 20px auto; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-        .product-image { 
-            width: 100%; 
-            border-radius: 15px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        .product-info h1 { 
-            color: #333; 
-            margin-bottom: 15px; 
-            font-size: 2.5em;
-        }
-        .product-price { 
-            font-size: 2em; 
-            color: #4CAF50; 
-            margin: 20px 0; 
-            font-weight: bold;
-        }
-        .product-meta {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        .product-meta p { 
-            margin: 8px 0; 
-            color: #666;
-        }
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        .btn-primary { 
-            background: #4CAF50; 
-            color: white; 
-            padding: 15px 30px; 
-            border: none; 
-            border-radius: 10px; 
-            font-size: 1.1em;
-            cursor: pointer;
-            flex: 1;
-            min-width: 200px;
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover { 
-            background: #45a049; 
-            transform: translateY(-2px);
-        }
-        .btn-secondary { 
-            background: #2196F3; 
-            color: white; 
-            padding: 15px 30px; 
-            border: none; 
-            border-radius: 10px; 
-            font-size: 1.1em;
-            cursor: pointer;
-            flex: 1;
-            min-width: 200px;
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover { 
-            background: #0b7dda; 
-            transform: translateY(-2px);
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .product-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .product-detail {
-                padding: 20px;
-            }
-            .btn-group {
-                flex-direction: column;
-            }
-        }
+        body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+        .back-btn { background: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .product-detail { background: white; padding: 20px; border-radius: 10px; margin: 20px auto; max-width: 600px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="back-btn">← Back to Products</a>
-        <div id="productDetail" class="product-detail">
-            <div class="product-grid">
-                <div>
-                    <img id="productImage" class="product-image" src="" alt="Product Image">
-                </div>
-                <div class="product-info">
-                    <h1 id="productName">Loading product...</h1>
-                    <div class="product-price" id="productPrice"></div>
-                    <p id="productDescription" style="font-size: 1.1em; line-height: 1.6; color: #666;"></p>
-                    
-                    <div class="product-meta">
-                        <p><strong>Category:</strong> <span id="productCategory"></span></p>
-                        <p><strong>Stock:</strong> <span id="productStock"></span> units available</p>
-                        <p><strong>Product ID:</strong> #<span id="productId"></span></p>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button class="btn-primary" onclick="addToCart()">🛒 Add to Cart</button>
-                        <button class="btn-secondary" onclick="shareProduct()">📤 Share Product</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <a href="index.html" class="back-btn">← Back to Products</a>
+    <div id="productDetail" class="product-detail">
+        <h2>Loading product details...</h2>
     </div>
     
     <script>
-        // Get product ID from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const productId = parseInt(urlParams.get('id'));
+        const productId = urlParams.get('id');
         
-        let currentProduct = null;
-        
-        // Load product details
-        async function loadProductDetails() {
-            if (!productId) {
-                document.getElementById('productName').textContent = 'Product not found';
-                return;
-            }
-            
-            try {
-                const response = await fetch('products.json');
-                const data = await response.json();
-                currentProduct = data.products.find(p => p.id === productId);
-                
-                if (currentProduct) {
-                    displayProduct(currentProduct);
-                    updatePageMetadata(currentProduct);
-                } else {
-                    document.getElementById('productName').textContent = 'Product not found';
-                }
-            } catch (error) {
-                console.error('Error loading product:', error);
-                document.getElementById('productName').textContent = 'Error loading product';
-            }
-        }
-        
-        function displayProduct(product) {
-            document.getElementById('productName').textContent = product.name;
-            document.getElementById('productPrice').textContent = `$${product.price}`;
-            document.getElementById('productDescription').textContent = product.description;
-            document.getElementById('productCategory').textContent = product.category;
-            document.getElementById('productStock').textContent = product.stock;
-            document.getElementById('productId').textContent = product.id;
-            
-            const productImage = document.getElementById('productImage');
-            productImage.src = product.image;
-            productImage.alt = product.name;
-        }
-        
-        function updatePageMetadata(product) {
-            // Update page title
-            document.title = `${product.name} - $${product.price} | Marketplace Pro`;
-            
-            // Update meta tags for SEO (if needed later)
-        }
-        
-        function addToCart() {
-            if (currentProduct) {
-                alert(`✅ Added to cart: ${currentProduct.name} - $${currentProduct.price}`);
-                // Add actual cart logic here
-                console.log('Added to cart:', currentProduct);
-            }
-        }
-        
-        function shareProduct() {
-            if (currentProduct && navigator.share) {
-                navigator.share({
-                    title: currentProduct.name,
-                    text: currentProduct.description,
-                    url: window.location.href
+        if (productId) {
+            fetch('products.json')
+                .then(r => r.json())
+                .then(data => {
+                    const product = data.products.find(p => p.id == productId);
+                    if (product) {
+                        document.getElementById('productDetail').innerHTML = `
+                            <h1>${product.name}</h1>
+                            <img src="${product.image}" width="100%" style="border-radius:10px;">
+                            <p style="font-size:24px;color:#4CAF50;"><strong>$${product.price}</strong></p>
+                            <p><strong>Category:</strong> ${product.category}</p>
+                            <p><strong>Description:</strong> ${product.description}</p>
+                            <p><strong>Stock:</strong> ${product.stock} available</p>
+                            <button style="background:#4CAF50;color:white;padding:15px 30px;border:none;border-radius:5px;font-size:18px;margin-top:20px;">
+                                Add to Cart
+                            </button>
+                        `;
+                    } else {
+                        document.getElementById('productDetail').innerHTML = '<p>Product not found</p>';
+                    }
+                })
+                .catch(err => {
+                    document.getElementById('productDetail').innerHTML = '<p>Error loading product</p>';
                 });
-            } else {
-                // Fallback for browsers that don't support Web Share API
-                alert(`Share this product: ${window.location.href}`);
-            }
+        } else {
+            document.getElementById('productDetail').innerHTML = '<p>No product ID specified</p>';
         }
-        
-        // Load product when page loads
-        loadProductDetails();
     </script>
 </body>
 </html>
