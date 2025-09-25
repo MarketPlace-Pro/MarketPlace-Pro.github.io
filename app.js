@@ -1,114 +1,68 @@
-// Marketplace Pro with Debugging
+// Marketplace Pro - Fixed Version
 console.log("🔄 app.js loaded");
 
-// Global variables
 let currentProducts = [];
 const productsContainer = document.getElementById('productsContainer');
-const PAGE_SIZE = 12;
-let currentPage = 1;
 
-// Debug function
-function debug(message) {
-    console.log("🔍 " + message);
-    // Also show on page for mobile debugging
-    const debugDiv = document.getElementById('debug') || (function() {
-        const div = document.createElement('div');
-        div.id = 'debug';
-        div.style.cssText = 'position:fixed;top:0;left:0;background:red;color:white;padding:10px;z-index:10000;font-size:12px;';
-        document.body.appendChild(div);
-        return div;
-    })();
-    debugDiv.innerHTML += message + '<br>';
+// Show loading message immediately
+if (productsContainer) {
+    productsContainer.innerHTML = '<div style="padding:20px;text-align:center;">🔄 Loading products...</div>';
 }
 
 async function loadProducts() {
-    debug("Starting loadProducts...");
+    console.log("📦 Loading products...");
     try {
         const response = await fetch('products.json');
-        debug("Fetch response received: " + response.status);
-        
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        
         const data = await response.json();
-        debug("JSON parsed successfully: " + data.products.length + " products");
+        console.log("✅ Loaded", data.products.length, "products");
         return data.products;
     } catch (error) {
-        debug("Error in loadProducts: " + error.message);
-        // Fallback to local data
-        return [
-            {
-                id: 1,
-                name: "Wireless Bluetooth Headphones",
-                price: 79.99,
-                description: "Test product",
-                category: "Electronics",
-                image: "https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Headphones"
-            }
-        ];
+        console.error("❌ Error:", error);
+        return [];
     }
 }
 
-async function renderProducts() {
-    debug("Starting renderProducts...");
-    try {
-        currentProducts = await loadProducts();
-        debug("Products loaded: " + currentProducts.length);
-        renderProductsList(currentProducts);
-    } catch (error) {
-        debug("Error in renderProducts: " + error.message);
-    }
-}
-
-function renderProductsList(products) {
-    debug("Starting renderProductsList with " + products.length + " products");
-    const container = productsContainer;
+function renderProducts(products) {
+    console.log("🎨 Rendering", products.length, "products");
     
-    if (!container) {
-        debug("❌ ERROR: productsContainer not found!");
+    if (!productsContainer) {
+        console.error("❌ productsContainer not found!");
         return;
     }
-    
-    container.innerHTML = '';
-    debug("Container cleared");
     
     if (products.length === 0) {
-        container.innerHTML = '<p>No products found</p>';
-        debug("No products to display");
+        productsContainer.innerHTML = '<p>No products found</p>';
         return;
     }
     
-    products.forEach((product, index) => {
-        const productHTML = `
-            <div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:5px;">
-                <h3>${product.name}</h3>
-                <p><strong>$${product.price}</strong></p>
-                <p>${product.description}</p>
-                <button onclick="alert('Added ${product.name} to cart')">Add to Cart</button>
-            </div>
-        `;
-        container.innerHTML += productHTML;
-    });
+    // Simple product display that WILL work
+    productsContainer.innerHTML = products.map(product => `
+        <div style="border:2px solid #4CAF50;border-radius:10px;padding:15px;margin:10px;background:white;">
+            <h3 style="color:#333;margin:0 0 10px 0;">${product.name}</h3>
+            <p style="font-size:20px;color:#4CAF50;margin:0 0 10px 0;"><strong>$${product.price}</strong></p>
+            <p style="color:#666;margin:0 0 15px 0;">${product.description}</p>
+            <button style="background:#4CAF50;color:white;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;">
+                Add to Cart
+            </button>
+        </div>
+    `).join('');
     
-    debug("✅ " + products.length + " products rendered successfully");
+    console.log("🎉 Products displayed successfully!");
 }
 
-function init() {
-    debug("=== INIT FUNCTION STARTED ===");
-    debug("productsContainer exists: " + (!!productsContainer));
+async function init() {
+    console.log("🚀 Initializing...");
     
-    // Start loading products
-    renderProducts();
+    // Load and render products
+    const products = await loadProducts();
+    renderProducts(products);
     
-    debug("=== INIT FUNCTION COMPLETED ===");
+    console.log("✅ Initialization complete");
 }
 
-// Start when DOM is ready
+// Start when ready
 if (document.readyState === 'loading') {
-    debug("DOM loading, adding event listener");
     document.addEventListener('DOMContentLoaded', init);
 } else {
-    debug("DOM already ready, calling init directly");
     init();
 }
-
-debug("app.js execution completed");
