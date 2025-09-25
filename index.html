@@ -3,13 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketplace Pro - Global E-commerce</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Marketplace Pro - Online Store for Electronics, Fitness & More</title>
+    <meta name="description" content="Shop premium electronics, fitness gear, and lifestyle products at Marketplace Pro. Free shipping, great prices, and quality guaranteed.">
+    <meta name="keywords" content="electronics, headphones, smartwatch, coffee, yoga mat, online shopping, ecommerce">
+    <meta name="author" content="Marketplace Pro">
+    
+    <!-- Open Graph Meta Tags (Social Media SEO) -->
+    <meta property="og:title" content="Marketplace Pro - Premium Online Store">
+    <meta property="og:description" content="Discover amazing products at great prices. Shop electronics, fitness gear, and lifestyle products.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marketplace-pro.github.io/">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/4A90E2/FFFFFF?text=Marketplace+Pro">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Marketplace Pro - Premium Online Store">
+    <meta name="twitter:description" content="Shop electronics, fitness gear, and lifestyle products at great prices.">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Marketplace Pro",
+      "url": "https://marketplace-pro.github.io/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://marketplace-pro.github.io/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
     <style>
         body { 
             font-family: Arial, sans-serif; 
             margin: 0; 
             padding: 20px; 
             background: #f5f5f5; 
+            line-height: 1.6;
         }
         .container { 
             max-width: 1200px; 
@@ -60,56 +94,92 @@
         }
         .btn-cart { background: #4CAF50; }
         .btn-details { background: #2196F3; }
+        
+        /* SEO-friendly content */
+        .seo-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Main Header -->
         <header>
-            <h1>🛍️ Marketplace Pro</h1>
-            <p>Discover amazing products at great prices</p>
+            <h1>🛍️ Marketplace Pro - Premium Online Store</h1>
+            <p>Discover amazing electronics, fitness gear, and lifestyle products at great prices</p>
         </header>
         
+        <!-- SEO Content Section -->
+        <section class="seo-content">
+            <h2>Welcome to Marketplace Pro</h2>
+            <p>Marketplace Pro is your premier destination for high-quality products including <strong>wireless headphones</strong>, <strong>smart fitness watches</strong>, <strong>organic coffee beans</strong>, and <strong>premium yoga mats</strong>. We offer competitive prices and excellent customer service.</p>
+            
+            <h3>Featured Product Categories</h3>
+            <ul>
+                <li><strong>Electronics:</strong> Latest headphones and smartwatches</li>
+                <li><strong>Fitness Gear:</strong> Quality equipment for your active lifestyle</li>
+                <li><strong>Lifestyle Products:</strong> Premium items for daily living</li>
+            </ul>
+        </section>
+
+        <!-- Products Grid -->
+        <h2>Featured Products</h2>
         <div class="products-grid">
             <!-- Product 1 -->
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Headphones" alt="Wireless Bluetooth Headphones" class="product-image">
+            <article class="product-card">
+                <img src="https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Headphones" alt="Wireless Bluetooth Headphones with Noise Cancellation" class="product-image">
                 <h3>Wireless Bluetooth Headphones</h3>
                 <div class="product-price">$79.99</div>
-                <p>High-quality wireless headphones with noise cancellation</p>
+                <p>High-quality wireless headphones with advanced noise cancellation technology for immersive audio experience.</p>
                 <a href="product1.html" class="btn btn-cart">Add to Cart</a>
                 <a href="product1.html" class="btn btn-details">View Details</a>
-            </div>
+            </article>
             
             <!-- Product 2 -->
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300x300/50E3C2/FFFFFF?text=Smartwatch" alt="Smart Fitness Watch" class="product-image">
+            <article class="product-card">
+                <img src="https://via.placeholder.com/300x300/50E3C2/FFFFFF?text=Smartwatch" alt="Smart Fitness Watch with Health Tracking" class="product-image">
                 <h3>Smart Fitness Watch</h3>
                 <div class="product-price">$199.99</div>
-                <p>Track your health and fitness with this advanced smartwatch</p>
+                <p>Advanced smartwatch with comprehensive health tracking, GPS, and long battery life for fitness enthusiasts.</p>
                 <a href="product2.html" class="btn btn-cart">Add to Cart</a>
                 <a href="product2.html" class="btn btn-details">View Details</a>
-            </div>
+            </article>
             
             <!-- Product 3 -->
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300x300/B8E986/FFFFFF?text=Coffee" alt="Organic Coffee Beans" class="product-image">
+            <article class="product-card">
+                <img src="https://via.placeholder.com/300x300/B8E986/FFFFFF?text=Coffee" alt="Organic Ethiopian Coffee Beans" class="product-image">
                 <h3>Organic Coffee Beans</h3>
                 <div class="product-price">$24.99</div>
-                <p>Premium organic coffee beans from Ethiopia</p>
+                <p>Premium organic coffee beans sourced directly from Ethiopia, offering rich flavor and aroma.</p>
                 <a href="product3.html" class="btn btn-cart">Add to Cart</a>
                 <a href="product3.html" class="btn btn-details">View Details</a>
-            </div>
+            </article>
             
             <!-- Product 4 -->
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Yoga+Mat" alt="Yoga Mat Premium" class="product-image">
+            <article class="product-card">
+                <img src="https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Yoga+Mat" alt="Non-Slip Premium Yoga Mat" class="product-image">
                 <h3>Yoga Mat Premium</h3>
                 <div class="product-price">$49.99</div>
-                <p>Non-slip yoga mat for comfortable exercises</p>
+                <p>Professional-grade non-slip yoga mat providing comfort and stability for all types of exercises.</p>
                 <a href="product4.html" class="btn btn-cart">Add to Cart</a>
                 <a href="product4.html" class="btn btn-details">View Details</a>
-            </div>
+            </article>
         </div>
+        
+        <!-- Additional SEO Content -->
+        <section class="seo-content">
+            <h2>Why Choose Marketplace Pro?</h2>
+            <p>We are committed to providing the best shopping experience with:</p>
+            <ul>
+                <li>✅ <strong>Quality Products:</strong> Carefully selected items from trusted suppliers</li>
+                <li>✅ <strong>Competitive Pricing:</strong> Great value for your money</li>
+                <li>✅ <strong>Fast Shipping:</strong> Quick delivery across all regions</li>
+                <li>✅ <strong>Customer Support:</strong> 24/7 assistance for all your needs</li>
+            </ul>
+        </section>
     </div>
 </body>
 </html>
